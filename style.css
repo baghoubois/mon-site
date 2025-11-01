@@ -101,7 +101,7 @@ body {
     width: 100%;
     z-index: 1000;
     background-color: rgba(255, 255, 255, 0);
-    padding: 1.5rem 0; /* UPDATED - Increased padding for bigger logo */
+    padding: 1rem 0;
     transition: all var(--transition-smooth);
 }
 
@@ -109,7 +109,7 @@ body {
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(8px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    padding: 0.75rem 0; /* UPDATED - Adjusted scrolled padding */
+    padding: 0.5rem 0;
 }
 
 .main-header .container {
@@ -119,12 +119,12 @@ body {
 }
 
 .header-logo img {
-    height: 100px; /* UPDATED - Significantly increased logo size */
+    height: 70px;
     transition: height var(--transition-smooth);
 }
 
 .main-header.scrolled .header-logo img {
-    height: 70px; /* UPDATED - Adjusted scrolled logo size */
+    height: 55px;
 }
 
 .main-nav ul {
@@ -490,14 +490,6 @@ body {
     .section { padding: 4rem 0; }
     .quote-form { grid-template-columns: 1fr; }
 
-    /* UPDATED - Mobile logo size */
-    .header-logo img {
-        height: 60px;
-    }
-    .main-header.scrolled .header-logo img {
-        height: 50px;
-    }
-    
     /* Menu mobile */
     .nav-toggle {
         display: block;
