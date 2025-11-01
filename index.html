@@ -7,31 +7,32 @@
     
     <!-- Google Fonts Links (Verified) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         /* 
         ========================================
-        CSS STYLES
+        CSS STYLES - REFRESHED & VISUALLY APPEALING
         ========================================
         */
 
         :root {
-            --primary-color: #4a3728;      /* Deep, rich Walnut brown */
-            --secondary-color: #b88b4a;    /* Warm Oak/Gold */
-            --accent-color: #c89f62;       /* Lighter Pine for highlights */
-            --background-light: #f9f6f2;   /* Warm, creamy off-white */
-            --text-dark: #3d3d3d;          /* Soft, dark gray */
+            /* NEW: Brighter, warmer color palette */
+            --primary-color: #6D4C41;      /* A warmer, more inviting brown */
+            --secondary-color: #b88b4a;    /* Warm Oak/Gold - Kept for consistency */
+            --accent-color: #c89f62;       /* Lighter Pine - Kept for consistency */
+            --background-light: #fdfaf6;   /* A slightly brighter, creamy off-white */
+            --text-dark: #333333;          /* Standard soft black for better readability */
             --white-color: #ffffff;
             --whatsapp-green: #25D366;     /* Official WhatsApp Green */
 
             --font-heading: 'Oswald', sans-serif;
             --font-body: 'Roboto', sans-serif;
             
-            --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.05);
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.06);
             --shadow-strong: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --border-radius: 8px; /* Slightly more rounded corners */
+            --border-radius: 8px;
         }
 
         /* --- General Setup & Body --- */
@@ -57,16 +58,15 @@
             background: var(--white-color);
             padding: 1rem 0;
             position: sticky; top: 0; z-index: 999; 
-            box-shadow: var(--shadow-strong);
+            box-shadow: var(--shadow-light); /* UPDATED: Softer shadow */
             border-bottom: 4px solid var(--secondary-color);
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
         
-        /* Styles for the image logo */
         .logo { text-decoration: none; }
         .logo img {
-            max-height: 90px; /* Controls the size of your logo */
-            width: auto;      /* Keeps the aspect ratio correct */
+            max-height: 90px;
+            width: auto;
             vertical-align: middle;
         }
 
@@ -85,7 +85,8 @@
         /* --- Hero Section --- */
         .hero {
             height: 85vh;
-            background: linear-gradient(rgba(42, 29, 17, 0.6), rgba(42, 29, 17, 0.6)), url('image1.jpg');
+            /* UPDATED: Lighter, more neutral overlay to make the image pop */
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image1.jpg');
             background-size: cover; background-position: center; background-attachment: fixed;
             display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white-color);
         }
@@ -132,7 +133,7 @@
             border-radius: var(--border-radius); align-self: flex-start; transition: background-color 0.3s ease;
             text-transform: uppercase; font-family: var(--font-body); font-weight: 500; font-size: 0.9rem;
         }
-        .discover-btn:hover { background-color: #33261b; }
+        .discover-btn:hover { background-color: #5a3e33; }
 
         /* 
         ========================================
@@ -188,10 +189,7 @@
             color: var(--primary-color);
         }
 
-        /* Specific label for select must always be up when a value is selected */
-        .quote-form select + label {
-            background-color: var(--background-light); /* Needs background to cover the border */
-        }
+        .quote-form select + label { background-color: var(--background-light); }
         
         .quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus {
             outline: none;
@@ -278,7 +276,10 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
+                    <!-- ===================== FIX ===================== -->
+                    <!-- The filename is case-sensitive. Changed "logo.png" to "LOGO.png" -->
                     <img src="LOGO.png" alt="Baghou Bois Logo">
+                    <!-- =============================================== -->
                 </a>
                 <nav class="main-nav">
                     <ul>
@@ -455,4 +456,3 @@
 </body>
 
 </html>
-
