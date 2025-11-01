@@ -13,19 +13,18 @@
     <style>
         /* 
         ========================================
-        CSS STYLES - REFRESHED & VISUALLY APPEALING
+        CSS STYLES - REFRESHED & DYNAMIC
         ========================================
         */
 
         :root {
-            /* NEW: Brighter, warmer color palette */
-            --primary-color: #6D4C41;      /* A warmer, more inviting brown */
-            --secondary-color: #b88b4a;    /* Warm Oak/Gold - Kept for consistency */
-            --accent-color: #c89f62;       /* Lighter Pine - Kept for consistency */
-            --background-light: #fdfaf6;   /* A slightly brighter, creamy off-white */
-            --text-dark: #333333;          /* Standard soft black for better readability */
+            --primary-color: #6D4C41;      
+            --secondary-color: #b88b4a;    
+            --accent-color: #c89f62;       
+            --background-light: #fdfaf6;   
+            --text-dark: #333333;          
             --white-color: #ffffff;
-            --whatsapp-green: #25D366;     /* Official WhatsApp Green */
+            --whatsapp-green: #25D366;     
 
             --font-heading: 'Oswald', sans-serif;
             --font-body: 'Roboto', sans-serif;
@@ -58,7 +57,7 @@
             background: var(--white-color);
             padding: 1rem 0;
             position: sticky; top: 0; z-index: 999; 
-            box-shadow: var(--shadow-light); /* UPDATED: Softer shadow */
+            box-shadow: var(--shadow-light); 
             border-bottom: 4px solid var(--secondary-color);
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
@@ -82,22 +81,52 @@
         .main-nav a:hover, .main-nav a:focus { color: var(--secondary-color); }
         .main-nav a:hover::after { width: 100%; }
 
-        /* --- Hero Section --- */
+        /* 
+        ========================================
+        NEW: DYNAMIC HERO SECTION
+        ========================================
+        */
+        @keyframes kenburns-zoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
         .hero {
             height: 85vh;
-            /* UPDATED: Lighter, more neutral overlay to make the image pop */
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image1.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            position: relative; /* Required for pseudo-element positioning */
+            overflow: hidden;   /* Hides the overflowing parts of the zooming image */
             display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white-color);
         }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image1.jpg'); /* UPDATED: Lighter overlay */
+            background-size: cover;
+            background-position: center;
+            /* Applying the animation */
+            animation: kenburns-zoom 20s ease-out forwards;
+            z-index: -1; /* Puts the background behind the content */
+        }
+        
+        .hero-content {
+             /* This content is already centered by flexbox on .hero */
+        }
+
         .hero-content h1 { font-size: 4.5rem; color: var(--white-color); text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
         .hero-content p { font-size: 1.5rem; margin: 1rem 0 2rem; font-weight: 400; }
+        
         .cta-button {
             background-color: var(--secondary-color); color: var(--white-color); padding: 15px 40px; text-decoration: none;
             font-family: var(--font-heading); font-size: 1.2rem; border-radius: var(--border-radius);
             transition: background-color 0.3s ease, transform 0.3s ease; display: inline-block;
         }
-        .cta-button:hover { background-color: var(--accent-color); transform: translateY(-3px); }
+        .cta-button:hover { 
+            background-color: var(--accent-color); 
+            transform: translateY(-3px) scale(1.05); /* UPDATED: Added a slight grow on hover */
+        }
 
         /* --- Common Section Styles --- */
         .section { padding: 6rem 0; }
@@ -106,11 +135,7 @@
         .title-underline { width: 100px; height: 4px; background-color: var(--secondary-color); margin: 0 auto 3rem; border-radius: 2px; }
         
         /* --- About Section --- */
-        .about-text {
-            max-width: 850px;
-            margin: 0 auto;
-            text-align: center;
-        }
+        .about-text { max-width: 850px; margin: 0 auto; text-align: center; }
         .about-text p { margin-bottom: 1.5rem; }
 
         /* --- Products Section --- */
@@ -135,94 +160,42 @@
         }
         .discover-btn:hover { background-color: #5a3e33; }
 
-        /* 
-        ========================================
-        ELEGANT & PROFESSIONAL FORM STYLES
-        ========================================
-        */
+        /* --- Form Styles --- */
         .quote-form-intro { text-align: center; max-width: 700px; margin: -2rem auto 3rem; font-size: 1.1rem; }
-        
         .form-container {
-            max-width: 850px;
-            margin: 0 auto;
-            background-color: var(--white-color);
-            padding: 3rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-strong);
-            border: 1px solid #eee;
+            max-width: 850px; margin: 0 auto; background-color: var(--white-color);
+            padding: 3rem; border-radius: var(--border-radius); box-shadow: var(--shadow-strong); border: 1px solid #eee;
         }
-
         .quote-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
         .form-group { position: relative; }
         .form-group.full-width { grid-column: 1 / -1; }
-        
         .quote-form input, .quote-form select, .quote-form textarea {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            background-color: var(--background-light);
-            font-family: var(--font-body); font-size: 1rem;
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: var(--border-radius);
+            background-color: var(--background-light); font-family: var(--font-body); font-size: 1rem;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
         .quote-form label {
-            position: absolute;
-            top: 15px; left: 15px;
-            font-weight: 500; color: #999;
-            pointer-events: none;
-            transition: all 0.2s ease-out;
-            background-color: var(--background-light);
-            padding: 0 5px;
+            position: absolute; top: 15px; left: 15px; font-weight: 500; color: #999;
+            pointer-events: none; transition: all 0.2s ease-out; background-color: var(--background-light); padding: 0 5px;
         }
-
-        /* Logic for floating label */
-        .quote-form input:focus + label,
-        .quote-form input:not(:placeholder-shown) + label,
-        .quote-form textarea:focus + label,
-        .quote-form textarea:not(:placeholder-shown) + label,
-        .quote-form select:focus + label,
-        .quote-form select:not([value=""]) + label {
-            top: -10px;
-            left: 10px;
-            font-size: 0.85rem;
-            color: var(--primary-color);
+        .quote-form input:focus + label, .quote-form input:not(:placeholder-shown) + label,
+        .quote-form textarea:focus + label, .quote-form textarea:not(:placeholder-shown) + label,
+        .quote-form select:focus + label, .quote-form select:not([value=""]) + label {
+            top: -10px; left: 10px; font-size: 0.85rem; color: var(--primary-color);
         }
-
         .quote-form select + label { background-color: var(--background-light); }
-        
         .quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(184, 139, 74, 0.2);
+            outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 3px rgba(184, 139, 74, 0.2);
         }
-
         .quote-form textarea { resize: vertical; min-height: 150px; }
-
-        /* Submit Button */
         .submit-btn {
-            grid-column: 1 / -1;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            color: var(--white-color);
-            border: none;
-            padding: 16px;
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            grid-column: 1 / -1; background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: var(--white-color); border: none; padding: 16px; font-family: var(--font-heading);
+            font-size: 1.3rem; text-transform: uppercase; letter-spacing: 1px; border-radius: var(--border-radius);
+            cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+            gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(184, 139, 74, 0.3);
-        }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(184, 139, 74, 0.3); }
         .submit-btn svg { width: 20px; height: 20px; fill: currentColor; }
 
         /* --- Footer --- */
@@ -276,10 +249,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <!-- ===================== UPDATED ===================== -->
-                    <!-- The logo source now points to your Cloudinary URL -->
                     <img src="https://res.cloudinary.com/ddrvpufix/image/upload/v1761991872/Generated_Image_November_01_2025_-_11_08AM_nunea0.png" alt="Baghou Bois Logo">
-                    <!-- =============================================== -->
                 </a>
                 <nav class="main-nav">
                     <ul>
@@ -352,31 +322,22 @@
                 <div class="form-container fade-in-element">
                     <form action="https://docs.google.com/forms/d/e/1FAIpQLSc2CJKypu1tCssZObZfgrKZ4Yc3RuvILNpdtUNLjAJ0LI5HYw/formResponse" method="POST" class="quote-form" target="_blank">
                         
-                        <!-- Name -->
                         <div class="form-group">
                             <input type="text" id="name" name="entry.159889836" required placeholder=" ">
                             <label for="name">Nom Complet / Société</label>
                         </div>
-                        
-                        <!-- Email -->
                         <div class="form-group">
                             <input type="email" id="email" name="entry.22690228" required placeholder=" ">
                             <label for="email">Adresse Email</label>
                         </div>
-                        
-                        <!-- Phone -->
                         <div class="form-group">
                             <input type="tel" id="phone" name="entry.2103021895" required placeholder=" ">
                             <label for="phone">Téléphone</label>
                         </div>
-                        
-                        <!-- Quantity -->
                         <div class="form-group">
                             <input type="text" id="quantity" name="entry.819237662" placeholder=" ">
                             <label for="quantity">Quantité (ex: 50m²)</label>
                         </div>
-                        
-                        <!-- Product Category -->
                         <div class="form-group full-width">
                             <select id="product_category" name="entry.425740259" required value="">
                                 <option value="" disabled selected></option>
@@ -387,17 +348,13 @@
                             </select>
                             <label for="product_category">Catégorie de Produit</label>
                         </div>
-                        
-                        <!-- Message -->
                         <div class="form-group full-width">
                             <textarea id="message" name="entry.1042878796" required placeholder=" "></textarea>
                             <label for="message">Détails de votre besoin (produits, dimensions, etc.)</label>
                         </div>
-                        
-                        <!-- Submit Button -->
                         <button type="submit" class="submit-btn">
                             <span>Demander un Devis</span>
-                            <svg xmlns="http://www.w3.0.0/svg" viewBox="0 0 512 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1-7.9 2.9-11.3l119-158.3-152.1 126.6c-13.2 11-33.1 11.8-47.4 2.1l-84-56c-14.2-9.5-21.2-26.3-17.9-42.5s14.9-28.7 30.6-32.8l416-112c14.4-3.9 29.6 .7 39.5 11.1z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1-7.9 2.9-11.3l119-158.3-152.1 126.6c-13.2 11-33.1 11.8-47.4 2.1l-84-56c-14.2-9.5-21.2-26.3-17.9-42.5s14.9-28.7 30.6-32.8l416-112c14.4-3.9 29.6 .7 39.5 11.1z"/></svg>
                         </button>
                     </form>
                 </div>
