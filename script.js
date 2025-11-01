@@ -1,13 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     initHeaderScroll();
-    initEntranceAnimations(); // Pour le héros
-    initScrollAnimations();     // Pour le reste de la page
-    initHeroParallax();         // Effet de profondeur
+    initEntranceAnimations(); // For the hero section
+    initScrollAnimations();     // For the rest of the page
+    initHeroParallax();         // Adds a depth effect
     initMobileMenu();
     updateCopyrightYear();
 });
 
-// Effet "premium" sur l'en-tête au défilement
+/**
+ * Adds a "scrolled" class to the header when the page is scrolled down,
+ * allowing for styling changes (e.g., background color, size).
+ */
 function initHeaderScroll() {
     const header = document.querySelector('.main-header');
     if (!header) return;
@@ -16,7 +19,9 @@ function initHeaderScroll() {
     });
 }
 
-// Animations d'entrée pour le contenu du héros
+/**
+ * Animates the hero content elements immediately on page load.
+ */
 function initEntranceAnimations() {
     const heroContent = document.querySelector('.hero-content');
     if (!heroContent) return;
@@ -28,7 +33,10 @@ function initEntranceAnimations() {
     });
 }
 
-// Animations au défilement pour le reste de la page
+/**
+ * Uses IntersectionObserver to trigger animations on elements as they
+ * scroll into the viewport. This is more performant than scroll event listeners.
+ */
 function initScrollAnimations() {
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
     if (!elementsToAnimate.length) return;
@@ -39,64 +47,68 @@ function initScrollAnimations() {
                 const el = entry.target;
                 const delay = el.dataset.delay || '0';
                 el.style.transitionDelay = `${delay}ms`;
-                
-                // Applique la classe de l'animation pour la déclencher
+
                 const animationType = el.dataset.animation || 'fade-up';
                 el.classList.add(animationType, 'is-visible');
 
-                // Si c'est un compteur, on l'anime
-                if(el.classList.contains('about-stats')) {
+                // If the element is the stats container, animate its counters
+                if (el.classList.contains('about-stats')) {
                     el.querySelectorAll('.stat-number').forEach(animateCounter);
                 }
 
-                observer.unobserve(el);
+                observer.unobserve(el); // Stop observing after animation
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
 
     elementsToAnimate.forEach(element => {
         observer.observe(element);
     });
 }
 
-// Effet Parallax pour l'arrière-plan du héros
+/**
+ * Creates a subtle parallax effect on the hero background on scroll.
+ */
 function initHeroParallax() {
     const heroBg = document.querySelector('.hero-background');
     if (!heroBg) return;
 
     window.addEventListener('scroll', () => {
         const scrollValue = window.scrollY;
-        // Le facteur 0.4 ralentit l'effet. Ajustez pour plus ou moins d'intensité.
+        // The 0.4 factor slows down the background's movement relative to the scroll
         heroBg.style.transform = `translateY(${scrollValue * 0.4}px)`;
     });
 }
 
-// Animation des compteurs
+/**
+ * Animates a number from 0 to its target value.
+ * @param {HTMLElement} counter The element containing the number to animate.
+ */
 function animateCounter(counter) {
     const target = +counter.getAttribute('data-target');
-    const duration = 2000; // Durée de 2 secondes
-    const easeOutCubic = t => 1 - Math.pow(1 - t, 3); // Fonction d'easing pour un effet plus doux
+    const duration = 2000; // 2 seconds
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3); // Easing function for a smooth effect
     let startTimestamp = null;
 
     function step(timestamp) {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const easedProgress = easeOutCubic(progress);
-        
+
         counter.innerText = Math.floor(easedProgress * target);
 
         if (progress < 1) {
             window.requestAnimationFrame(step);
         } else {
-            counter.innerText = target; // Assure que la valeur finale est exacte
+            counter.innerText = target; // Ensure the final value is exact
         }
     }
-
     window.requestAnimationFrame(step);
 }
 
-
-// Menu de navigation mobile
+/**
+ * Toggles the mobile navigation menu and ensures links close the menu on click.
+ */
 function initMobileMenu() {
     const navToggle = document.querySelector('.nav-toggle');
     const mainNav = document.querySelector('.main-nav');
@@ -106,6 +118,7 @@ function initMobileMenu() {
         document.body.classList.toggle('nav-open');
     });
 
+    // Close menu when a link is clicked
     mainNav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             document.body.classList.remove('nav-open');
@@ -113,7 +126,9 @@ function initMobileMenu() {
     });
 }
 
-// Mise à jour de l'année du copyright
+/**
+ * Automatically updates the copyright year in the footer.
+ */
 function updateCopyrightYear() {
     const yearSpan = document.getElementById('year');
     if (yearSpan) {
