@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     initHeaderScroll();
-    initEntranceAnimations(); // NOUVEAU: Pour le héros
-    initScrollAnimations();     // AMÉLIORÉ: Pour le reste de la page
-    initHeroParallax();         // NOUVEAU: Effet de profondeur
+    initEntranceAnimations(); // Pour le héros
+    initScrollAnimations();     // Pour le reste de la page
+    initHeroParallax();         // Effet de profondeur
     initMobileMenu();
     updateCopyrightYear();
 });
@@ -16,7 +16,7 @@ function initHeaderScroll() {
     });
 }
 
-// NOUVEAU: Animations d'entrée pour le contenu du héros
+// Animations d'entrée pour le contenu du héros
 function initEntranceAnimations() {
     const heroContent = document.querySelector('.hero-content');
     if (!heroContent) return;
@@ -28,7 +28,7 @@ function initEntranceAnimations() {
     });
 }
 
-// AMÉLIORÉ: Animations au défilement pour le reste de la page
+// Animations au défilement pour le reste de la page
 function initScrollAnimations() {
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
     if (!elementsToAnimate.length) return;
@@ -59,7 +59,7 @@ function initScrollAnimations() {
     });
 }
 
-// NOUVEAU: Effet Parallax pour l'arrière-plan du héros
+// Effet Parallax pour l'arrière-plan du héros
 function initHeroParallax() {
     const heroBg = document.querySelector('.hero-background');
     if (!heroBg) return;
@@ -74,21 +74,27 @@ function initHeroParallax() {
 // Animation des compteurs
 function animateCounter(counter) {
     const target = +counter.getAttribute('data-target');
-    const duration = 2000;
-    const stepTime = 20;
-    const increment = target / (duration / stepTime);
-    let current = 0;
+    const duration = 2000; // Durée de 2 secondes
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3); // Fonction d'easing pour un effet plus doux
+    let startTimestamp = null;
 
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            clearInterval(timer);
-            counter.innerText = target;
+    function step(timestamp) {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const easedProgress = easeOutCubic(progress);
+        
+        counter.innerText = Math.floor(easedProgress * target);
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
         } else {
-            counter.innerText = Math.ceil(current);
+            counter.innerText = target; // Assure que la valeur finale est exacte
         }
-    }, stepTime);
+    }
+
+    window.requestAnimationFrame(step);
 }
+
 
 // Menu de navigation mobile
 function initMobileMenu() {
